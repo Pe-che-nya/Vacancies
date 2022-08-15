@@ -49,23 +49,3 @@ specialties = [
 
 ]
 
-test=[{'id':2,'start_fields':'asfa'},
-      {'id':3,'start_fields':'asfa'}]
-J_son=[]
-for k in test:
-    dic={}
-    dic['model']='appVacancies.Vacancy'
-    dic['pk']=k['id']
-    dic_fields={}
-    for p in k:
-        #if p!='id':
-        dic_fields[p]=k[p]
-
-    dic['fields']=dic_fields
-    J_son.append(dic)
-print(J_son)
-
-json_string=json.dumps(J_son)
-print(json_string)
-with open('appVacancies/fixtures/proba.json', 'w') as f:
-    f.write(json_string)
