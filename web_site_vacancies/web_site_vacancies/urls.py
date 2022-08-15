@@ -25,7 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', MainPage.as_view()),
     path('vacancies/', AllVacanciesView.as_view()),
-    path('vacancies/cat/fronted', CatVacanciesView.as_view()),
+    path('vacancies/cat/<str:category>/', CatVacanciesView.as_view()),
     path('test/', test)
     #path('companies/<slug:int>', DetailCompanyView.as_view())
 
