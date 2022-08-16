@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
-from appVacancies.views import MainPage, AllVacanciesView, CatVacanciesView, DetailCompanyView,test
+from appVacancies.views import MainPage, AllVacanciesView, CatVacanciesView, CatCompanyView, DetailVacancyView
 from django.conf import settings
 
 
@@ -26,8 +26,8 @@ urlpatterns = [
     path('', MainPage.as_view()),
     path('vacancies/', AllVacanciesView.as_view()),
     path('vacancies/cat/<str:category>/', CatVacanciesView.as_view()),
-    path('test/', test)
-    #path('companies/<slug:int>', DetailCompanyView.as_view())
+    path('companies/<int:category>/', CatCompanyView.as_view()),
+    path('vacancies/<pk>/', DetailVacancyView.as_view())
 
 ]
 if settings.DEBUG:
