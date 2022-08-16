@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
-#from appVacancies.models import StartModel
 
 """ Вакансии """
-import json
 
 jobs = [
 

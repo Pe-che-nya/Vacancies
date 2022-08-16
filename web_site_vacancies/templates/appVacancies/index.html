@@ -1,5 +1,4 @@
 {% extends 'appVacancies/base.html' %}
-{% load static %}
 {% block content %}
 
   <main class="container mt-3">
@@ -33,7 +32,7 @@
           {% for speciality in specialities %}
             <div class="col-6 col-md-6 col-lg-3">
               <div class="card pt-4 text-center mb-4">
-                <img class="mx-auto d-block" src="{% static 'img/specty_frontend.png' %}" width="80" height="80" alt="">
+                <img class="mx-auto d-block" src="https://place-hold.it/100x60" width="80" height="80" alt="">
                 <div class="card-body">
                   <p class="card-text mb-2">{{ speciality.title }}</p>
                   <p class="card-text"><a href="#">5 вакансий</a></p>

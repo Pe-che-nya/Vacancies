@@ -6,6 +6,9 @@ class Speciality(models.Model):
     title = models.CharField(max_length=120, default=None)
     logo = models.URLField(default='https://place-hold.it/100x60')
 
+    def __str__(self):
+        return self.title
+
 
 class Company(models.Model):
     name = models.CharField(max_length=120, default=None)
@@ -13,6 +16,9 @@ class Company(models.Model):
     logo = models.URLField(default='https://place-hold.it/100x60')
     description = models.TextField()
     employee_count = models.IntegerField()
+
+    def __str__(self):
+        return self.name
 
 
 class Vacancy(models.Model):
@@ -24,3 +30,6 @@ class Vacancy(models.Model):
     salary_min = models.FloatField(default=None)
     salary_max = models.FloatField(default=None)
     published_at = models.DateTimeField()
+
+    def __str__(self):
+        return self.title

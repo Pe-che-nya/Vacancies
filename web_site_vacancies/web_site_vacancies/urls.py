@@ -13,12 +13,9 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 from appVacancies.views import MainPage, AllVacanciesView, CatVacanciesView, CatCompanyView, DetailVacancyView
-from django.conf import settings
-
 
 
 urlpatterns = [
@@ -27,8 +24,6 @@ urlpatterns = [
     path('vacancies/', AllVacanciesView.as_view()),
     path('vacancies/cat/<str:category>/', CatVacanciesView.as_view()),
     path('companies/<int:category>/', CatCompanyView.as_view()),
-    path('vacancies/<pk>/', DetailVacancyView.as_view())
+    path('vacancies/<pk>/', DetailVacancyView.as_view()),
 
 ]
-if settings.DEBUG:
-        urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
