@@ -1,4 +1,6 @@
-from django.views.generic import ListView, DetailView
+from django.shortcuts import get_list_or_404, render
+
+from django.views.generic import DetailView, ListView
 
 from appVacancies.models import Company, Speciality, Vacancy
 
@@ -12,6 +14,7 @@ class MainPage(ListView):
         context.update({
             'specialities': Speciality.objects.values('title', 'logo'),
             'companies': Company.objects.values('logo'),
+
         })
         return context
 
@@ -34,7 +37,8 @@ class CatVacanciesView(ListView):
 
     def get_queryset(self):
         self.name_query = self.kwargs['category']
-        self.query = Vacancy.objects.filter(speciality__code=self.name_query)
+        self.query = Vacancy.objects.select_related('speciality').filter(speciality__code=self.name_query)
+        get_list_or_404(self.query)
         return self.query
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -50,7 +54,8 @@ class CatCompanyView(ListView):
 
     def get_queryset(self):
         self.name_query = self.kwargs['category']
-        self.query = Vacancy.objects.filter(company__id=self.name_query)
+        self.query = Vacancy.objects.prefetch_related('company').filter(company__id=self.name_query)
+        get_list_or_404(self.query)
         return self.query
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -65,10 +70,18 @@ class DetailVacancyView(DetailView):
     template_name = 'appVacancies/vacancy.html'
 
     def get_queryset(self):
-
         return Vacancy.objects
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['company'] = self.get_queryset().get(id=self.kwargs['pk']).company
         return context
+
+
+def handler404(request, exception):
+    return render(request, 'appVacancies/error404.html', status=404)
+
+
+def handler500(request, *args, **kwargs):
+
+    return render(request, 'appVacancies/error500.html', status=500)
